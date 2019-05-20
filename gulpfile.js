@@ -209,7 +209,12 @@ const buildImages = function(done) {
 	if (!settings.img) return done();
 
 	return src(paths.img.input)
-		.pipe(imagemin())
+		.pipe(
+			imagemin([
+				imagemin.jpegtran({ progressive: true }),
+				imagemin.optipng({ optimizationLevel: 5 })
+			])
+		)
 		.pipe(dest(paths.img.output))
 		.pipe(webp())
 		.pipe(dest(paths.img.output));
