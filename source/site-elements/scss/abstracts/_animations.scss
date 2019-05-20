@@ -1,0 +1,42 @@
+// NOTE: ANIMATED FIXED CONTACT SLIDE OUT
+.fixed-contact {
+	&.-slide-in {
+		opacity: 1;
+		right: 0;
+
+		@include bp(tablet-p) {
+			bottom: 0;
+		}
+	}
+}
+
+// NOTE: ANIMATED HERO SECTION
+.info-container {
+	.title {
+		&.-fade-in {
+			opacity: 1;
+		}
+
+		&.-grow {
+			span {
+				&:last-of-type {
+					&::before {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+
+	.sub {
+		&.-fade-in {
+			opacity: 1;
+		}
+	}
+
+	> .intro {
+		&.-fade-in {
+			opacity: 1;
+		}
+	}
+}

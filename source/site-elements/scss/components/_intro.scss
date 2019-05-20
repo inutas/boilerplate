@@ -1,0 +1,45 @@
+.intro {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out 500ms;
+
+  .title {
+    @include font-size(50);
+
+    @include bp(phone) {
+      @include font-size(40);
+    }
+
+    span {
+      position: relative;
+
+      &::after {
+        background: $light-grey;
+        transition: opacity 500ms ease-in-out 500ms;
+
+        @include bp(phone) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  p,
+  li {
+    @include font-size(30);
+    font-family: $heading-font;
+  }
+
+  ul {
+    margin-top: 18px;
+  }
+
+  .-normal {
+
+    p,
+    li {
+      @include font-size(18);
+      font-family: $base-font;
+    }
+  }
+
+}

@@ -1,0 +1,50 @@
+// Visually hidden
+// Usage: @extend %visuallyhidden;
+%visuallyhidden {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+%visuallyhiddenfocusable {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+  white-space: inherit;
+}
+
+// Offscreen Text
+// Usage: @extend %linkTextOffscreen;
+%linkTextOffscreen {
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  font-size: 0;
+  text-align: start;
+}
+
+// Centre block
+// Usage: @extend %center-block;
+%center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Clearfix for Internet Explorer
+// Usage: @extend %ie-clear;
+%ie-clear {
+  overflow: hidden;
+  *zoom: 1;
+}

@@ -1,0 +1,93 @@
+// NOTE: BLOCKS
+.button {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 300ms ease-in-out;
+
+  &:hover {
+    color: $white !important;
+  }
+}
+
+section:not(.hero-container) .title {
+  position: relative;
+  font-weight: 700;
+
+  span {
+    & {
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: 20px;
+        width: 0%;
+        z-index: -1;
+        bottom: -8%;
+        left: 28px;
+        transition: width 500ms ease-in-out 800ms;
+
+        @include bp(phone) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+// NOTE: HELPERS
+._container {
+  margin: 0 auto;
+  max-width: 1240px;
+
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+._content {
+  display: block;
+  margin-top: 90px;
+}
+
+._pad-top {
+  padding-top: 70px;
+}
+
+// NOTE: VISIBILITY
+._desktop {
+  visibility: visible;
+
+  @include bp(tablet-p) {
+    visibility: hidden;
+  }
+}
+
+._mobile {
+  visibility: hidden;
+
+  @include bp(tablet-p) {
+    visibility: visible;
+  }
+}
+
+// NOTE: VISIBILITY
+._desktop-only {
+  display: block;
+
+  @include bp(tablet-p) {
+    display: none;
+  }
+}
+
+._mobile-only {
+  display: none;
+
+  @include bp(tablet-p) {
+    display: block;
+  }
+}

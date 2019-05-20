@@ -1,0 +1,13 @@
+// Vertical gradients 
+// Usage: @include linearGradient(rgba( $blue, .9), rgba( $blue, .4));
+
+@mixin linearGradient($left, $right){
+  background: $left; /* Old browsers */
+  background: -moz-linear-gradient(left,  $left 50%, $right 50%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left left, left right, color-stop(50%,$left), color-stop(50%,$right)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  $left 50%,$right 50%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  $left 50%,$right 50%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  $left 50%,$right 50%); /* IE10+ */
+  background: linear-gradient(to right,  $left 50%,$right 50%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
