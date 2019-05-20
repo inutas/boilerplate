@@ -1,3 +1,7 @@
+# Local Folders
+build/
+.DS_Store
+
 # Logs
 logs
 *.log

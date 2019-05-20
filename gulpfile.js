@@ -5,6 +5,7 @@ const settings = {
 	polyfills: true,
 	styles: true,
 	svgs: true,
+	img: true,
 	copy: true,
 	reload: true
 };
@@ -20,17 +21,21 @@ const paths = {
 	},
 	styles: {
 		input: 'source/site-elements/scss/**/*.{scss,sass}',
-		output: '/site-elements/css/'
+		output: 'build/site-elements/css/'
 	},
 	svgs: {
-		input: 'source/site-elements/img/svg/*',
-		output: 'build/site-elements/img/svg/'
+		input: 'source/site-elements/images/svg/*.{svg}',
+		output: 'build/site-elements/images/svg/'
+	},
+	img: {
+		input: 'source/site-elements/images/general/*.{png,jpg,jpeg}',
+		output: 'build/site-elements/images/'
 	},
 	copy: {
-		input: 'source/copy*',
+		input: 'source/copy/*',
 		output: 'build/'
 	},
-	relaod: './build/'
+	reload: './build/'
 };
 
 // NOTE: FILE HEADERS
@@ -46,14 +51,14 @@ const banner = {
 		' * <%= package.repository.url %> \n' +
 		' */\n\n',
 	min:
-		'/*!\n' +
-		' * <%= package.name %> v<%= package.version %> \n' +
+		'/*!' +
+		' * <%= package.name %> v<%= package.version %>' +
 		' | (c) ' +
 		new Date().getFullYear() +
-		' <%= package.author.name %> \n' +
-		' | <%= package.licence %> \n' +
-		' | <%= package.repository.url %> \n' +
-		' */\n\n'
+		' <%= package.author.name %>' +
+		' | <%= package.licence %>' +
+		' | <%= package.repository.url %>' +
+		' */\n'
 };
 
 // NOTE: GULP START
@@ -79,6 +84,10 @@ const minify = require('gulp-cssnano');
 
 // NOTE: SVGs
 const svgmin = require('gulp-svgmin');
+
+// NOTE: IMAGES
+const imagemin = require('gulp-imagemin');
+const webp = require('gulp-webp');
 
 // NOTE: BROWSERSYNC
 const browserSync = require('browser-sync');
@@ -133,7 +142,8 @@ const buildScripts = function(done) {
 				var suffix = '';
 
 				if (settings.polyfills) {
-					suffix = '.polyfills';
+					// suffix = '.polyfills';
+					suffix = '';
 
 					src([
 						file.path + '/*.js',
@@ -161,7 +171,7 @@ const lintScripts = function(done) {
 
 	return src(paths.scripts.input)
 		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'));
+		.pipe(jshint.reporter(stylish));
 };
 
 // NOTE: PROCESS, LINT AND MINIFY SASS FILES
@@ -186,12 +196,23 @@ const buildStyles = function(done) {
 };
 
 // NOTE: OPTIMISE SVG FILES
-var buildSVGs = function(done) {
+const buildSVGs = function(done) {
 	if (!settings.svgs) return done();
 
 	return src(paths.svgs.input)
 		.pipe(svgmin())
 		.pipe(dest(paths.svgs.output));
+};
+
+// NOTE: OPTIMISE IMAGE FILES
+const buildImages = function(done) {
+	if (!settings.img) return done();
+
+	return src(paths.img.input)
+		.pipe(imagemin())
+		.pipe(dest(paths.img.output))
+		.pipe(webp())
+		.pipe(dest(paths.img.output));
 };
 
 // NOTE: COPY STATIC FILES TO BUILD FOLDER
@@ -214,7 +235,7 @@ const startServer = function(done) {
 
 // NOTE: RELOAD THE BROWSER WHEN FILES CHANGE
 const reloadBrowser = function(done) {
-	if (!settings.relaod) return done();
+	if (!settings.reload) return done();
 	browserSync.reload();
 	done();
 };
@@ -230,8 +251,15 @@ const watchSource = function(done) {
 // Default task (gulp)
 exports.default = series(
 	cleanDist,
-	parallel(buildScripts, lintScripts, buildStyles, buildSVGs, copyFiles)
+	parallel(
+		buildScripts,
+		lintScripts,
+		buildStyles,
+		buildSVGs,
+		buildImages,
+		copyFiles
+	)
 );
 
-// Watch and relaod (gulp watch)
+// Watch and reload (gulp watch)
 exports.watch = series(exports.default, startServer, watchSource);
