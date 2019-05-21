@@ -2,13 +2,12 @@
 const settings = {
 	clean: true,
 	scripts: true,
-	hbs: true,
-	nunjuck: true,
 	polyfills: true,
 	styles: true,
 	svgs: true,
 	img: true,
 	copy: true,
+	hbs: true,
 	reload: true
 };
 
@@ -34,15 +33,11 @@ const paths = {
 		output: 'build/site-elements/images/'
 	},
 	copy: {
-		input: 'source/copy/*',
+		input: 'source/pages/*',
 		output: 'build/'
 	},
 	hbs: {
-		input: 'source/templates/*',
-		output: 'build/'
-	},
-	nunjuck: {
-		input: 'source/templates/*',
+		input: 'source/templates/*.hbs',
 		output: 'build/'
 	},
 	reload: './build/'
@@ -73,6 +68,9 @@ const lazypipe = require('lazypipe');
 const rename = require('gulp-rename');
 const header = require('gulp-header');
 const package = require('./package.json');
+
+// NOTE: COPY
+var handlebars = require('gulp-compile-handlebars');
 
 // NOTE: SCRIPTS
 const jshint = require('gulp-jshint');
@@ -224,13 +222,30 @@ const buildImages = function(done) {
 		.pipe(dest(paths.img.output));
 };
 
-// NOTE: COPY STATIC FILES TO BUILD FOLDER
+// NOTE: STATIC FILES TO BUILD FOLDER
 const copyFiles = function(done) {
 	if (!settings.copy) return done();
 
 	return src(paths.copy.input).pipe(dest(paths.copy.output));
 };
 
+// NOTE: HBS FILES TO BUILD FOLDER
+const hbsFiles = function(done) {
+	if (!settings.hbs) return done();
+
+	return src(paths.hbs.input)
+		.pipe(
+			handlebars(
+				{},
+				{
+					ignorePartials: true,
+					batch: ['./source/partials/']
+				}
+			)
+		)
+		.pipe(rename({ extname: '.html' }))
+		.pipe(dest(paths.hbs.output));
+};
 // NOTE: WATCH FOR CHANGES TO THE SOURCE FOLDER
 const startServer = function(done) {
 	if (!settings.reload) return done();
@@ -266,7 +281,8 @@ exports.default = series(
 		buildStyles,
 		buildSVGs,
 		buildImages,
-		copyFiles
+		copyFiles,
+		hbsFiles
 	)
 );
 
