@@ -2,6 +2,8 @@
 const settings = {
 	clean: true,
 	scripts: true,
+	hbs: true,
+	nunjuck: true,
 	polyfills: true,
 	styles: true,
 	svgs: true,
@@ -35,6 +37,14 @@ const paths = {
 		input: 'source/copy/*',
 		output: 'build/'
 	},
+	hbs: {
+		input: 'source/templates/*',
+		output: 'build/'
+	},
+	nunjuck: {
+		input: 'source/templates/*',
+		output: 'build/'
+	},
 	reload: './build/'
 };
 
@@ -42,21 +52,15 @@ const paths = {
 const banner = {
 	full:
 		'/*!\n' +
-		' * <%= package.name %> v<%= package.version %> \n' +
+		' * <%= package.name %> \n' +
 		' * <%= package.description %> \n' +
-		' * (c) ' +
-		new Date().getFullYear() +
-		' <%= package.author.name %> \n' +
-		' * <%= package.licence %> \n' +
+		' * <%= package.author %> \n' +
 		' * <%= package.repository.url %> \n' +
 		' */\n\n',
 	min:
 		'/*!' +
-		' * <%= package.name %> v<%= package.version %>' +
-		' | (c) ' +
-		new Date().getFullYear() +
-		' <%= package.author.name %>' +
-		' | <%= package.licence %>' +
+		' * <%= package.name %>' +
+		' | <%= package.author %>' +
 		' | <%= package.repository.url %>' +
 		' */\n'
 };
