@@ -20,7 +20,7 @@ A project boilerplate that utilises [Gulp 4](https://gulpjs.com/).
 ## Getting started
 Make sure have the following installed:
 
-[Node.js](https://nodejs.org/en/)
+[Node.js](https://nodejs.org/en/)  
 [Gulp Command Line Utility](https://gulpjs.com/) `npm install -g gulp-cli`
 
 **Quick Start**
@@ -39,8 +39,8 @@ After compiling a new folder called `build` will appear, this folder will house 
 
 **General docs**
 
-[Node.js](https://nodejs.org/en/) 
-[NPM Docs](https://www.npmjs.com/) 
+[Node.js](https://nodejs.org/en/)  
+[NPM Docs](https://www.npmjs.com/)  
 [Gulp Docs](https://gulpjs.com/)
 
 **Template docs**
@@ -49,5 +49,5 @@ After compiling a new folder called `build` will appear, this folder will house 
 
 **Styles**
 
-[Sass/SCSS](https://sass-lang.com/) 
+[Sass/SCSS](https://sass-lang.com/)  
 [rscss](https://rscss.io/)
