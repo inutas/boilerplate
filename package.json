@@ -30,6 +30,7 @@
     "gulp-imagemin": "^5.0.3",
     "gulp-jshint": "2.1.0",
     "gulp-optimize-js": "1.1.0",
+    "gulp-purgecss": "^1.2.0",
     "gulp-rename": "1.4.0",
     "gulp-sass": "4.0.2",
     "gulp-svgmin": "2.1.0",

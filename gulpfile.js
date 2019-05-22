@@ -83,6 +83,7 @@ const optimisejs = require('gulp-optimize-js');
 const sass = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
 const minify = require('gulp-cssnano');
+const purgecss = require('gulp-purgecss');
 
 // NOTE: SVGs
 const svgmin = require('gulp-svgmin');
@@ -189,6 +190,7 @@ const buildStyles = function(done) {
 				remove: true
 			})
 		)
+		.pipe(purgecss({ content: ['source/**/*.html', 'source/**/*.hbs'] }))
 		.pipe(header(banner.full, { package: package }))
 		.pipe(dest(paths.styles.output))
 		.pipe(rename({ suffix: '.min' }))
@@ -246,6 +248,7 @@ const hbsFiles = function(done) {
 		.pipe(rename({ extname: '.html' }))
 		.pipe(dest(paths.hbs.output));
 };
+
 // NOTE: WATCH FOR CHANGES TO THE SOURCE FOLDER
 const startServer = function(done) {
 	if (!settings.reload) return done();
@@ -276,13 +279,13 @@ const watchSource = function(done) {
 exports.default = series(
 	cleanDist,
 	parallel(
+		copyFiles,
+		hbsFiles,
 		buildScripts,
 		lintScripts,
 		buildStyles,
 		buildSVGs,
-		buildImages,
-		copyFiles,
-		hbsFiles
+		buildImages
 	)
 );
 
