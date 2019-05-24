@@ -1,5 +1,5 @@
-# Project boilerplate
-
+# Project boilerplate 
+![alt text](https://travis-ci.com/University-of-Hull/project-boilerplate.svg?token=69ckJa4VXSaQchDQg4bW&branch=master "Travis CI status")
 A project boilerplate that utilises [Gulp 4](https://gulpjs.com/).
 
 **Features**
