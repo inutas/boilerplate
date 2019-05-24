@@ -53,7 +53,8 @@ After compiling a new folder called `build` will appear, this folder will house 
 [Sass/SCSS](https://sass-lang.com/)  
 [rscss](https://rscss.io/)
 
-**Github docs**
+**Github docs**  
+
 [browser-sync](https://browsersync.io/)  
 [del](https://github.com/sindresorhus/del#readme)  
 [gulp](https://gulpjs.com/)  
