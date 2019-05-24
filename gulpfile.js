@@ -82,7 +82,7 @@ const optimisejs = require('gulp-optimize-js');
 // NOTE: STYLES
 const sass = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
-const minify = require('gulp-cssnano');
+const minify = require('gulp-clean-css');
 const purgecss = require('gulp-purgecss');
 
 // NOTE: SVGs
@@ -194,7 +194,7 @@ const buildStyles = function(done) {
 		.pipe(header(banner.full, { package: package }))
 		.pipe(dest(paths.styles.output))
 		.pipe(rename({ suffix: '.min' }))
-		.pipe(minify({ discardComments: { removeAll: true } }))
+		.pipe(minify({ level: { 1: { specialComments: 'none' } } }))
 		.pipe(header(banner.min, { package: package }))
 		.pipe(dest(paths.styles.output));
 };
