@@ -16,8 +16,7 @@ const paths = {
 	input: 'source/',
 	output: 'build/',
 	scripts: {
-		input: 'source/site-elements/js/*',
-		polyfills: '',
+		input: 'source/site-elements/js/*.js',
 		output: 'build/site-elements/js/'
 	},
 	styles: {
@@ -78,12 +77,14 @@ const stylish = require('jshint-stylish');
 const concat = require('gulp-concat');
 const uglify = require('gulp-terser');
 const optimisejs = require('gulp-optimize-js');
+const include = require('gulp-include');
 
 // NOTE: STYLES
 const sass = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
 const minify = require('gulp-clean-css');
 const purgecss = require('gulp-purgecss');
+const sourcemaps = require('gulp-sourcemaps');
 
 // NOTE: SVGs
 const svgmin = require('gulp-svgmin');
@@ -109,11 +110,13 @@ const cleanDist = function(done) {
 
 // NOTE: JS TASKS
 const jsTasks = lazypipe()
+	.pipe(sourcemaps.init)
 	.pipe(
 		header,
 		banner.full,
 		{ package: package }
 	)
+	.pipe(include)
 	.pipe(optimisejs)
 	.pipe(
 		dest,
@@ -130,6 +133,7 @@ const jsTasks = lazypipe()
 		banner.min,
 		{ package: package }
 	)
+	.pipe(sourcemaps.write.bind(null, './maps'))
 	.pipe(
 		dest,
 		paths.scripts.output
@@ -142,22 +146,8 @@ const buildScripts = function(done) {
 	return src(paths.scripts.input).pipe(
 		flatmap(function(stream, file) {
 			if (file.isDirectory()) {
-				var suffix = '';
-
-				if (settings.polyfills) {
-					// suffix = '.polyfills';
-					suffix = '';
-
-					src([
-						file.path + '/*.js',
-						'!' + file.path + '/*' + paths.scripts.polyfills
-					])
-						.pipe(concat(file.relative + '.js'))
-						.pipe(jsTasks());
-				}
-
 				src(file.path + '/*.js')
-					.pipe(concat(file.relative + suffix + '.js'))
+					.pipe(concat(file.relative + '.js'))
 					.pipe(jsTasks());
 
 				return stream;
@@ -182,7 +172,9 @@ const buildStyles = function(done) {
 	if (!settings.styles) return done();
 
 	return src(paths.styles.input)
+		.pipe(sourcemaps.init())
 		.pipe(sass({ outputStyle: 'expanded', sourceComments: true }))
+		.on('error', sass.logError)
 		.pipe(
 			prefix({
 				browsers: ['last 2 version', '> 0.25%'],
@@ -196,6 +188,7 @@ const buildStyles = function(done) {
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(minify({ level: { 1: { specialComments: 'none' } } }))
 		.pipe(header(banner.min, { package: package }))
+		.pipe(sourcemaps.write('./maps'))
 		.pipe(dest(paths.styles.output));
 };
 
