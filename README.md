@@ -1,4 +1,4 @@
-# Gulp 4 / Handlebars boilerplate [![Build Status](https://travis-ci.com/jonwelsh/gulp-hbs-boilerplate.svg?token=69ckJa4VXSaQchDQg4bW&branch=master)](https://travis-ci.com/jonwelsh/gulp-handlebars)
+# Gulp 4 / Handlebars boilerplate [![Build Status](https://travis-ci.com/University-of-Hull/project-boilerplate.svg?token=69ckJa4VXSaQchDQg4bW&branch=master)](https://travis-ci.com/University-of-Hull/project-boilerplate)
 
 A boilerplate for building projects using Gulp 4 and Handlebars.
 
