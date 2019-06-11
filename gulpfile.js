@@ -1,137 +1,114 @@
-// NOTE: SETTINGS
-const settings = {
-	clean: true,
-	scripts: true,
-	polyfills: true,
-	styles: true,
-	svgs: true,
-	img: true,
-	copy: true,
-	hbs: true,
-	reload: true
-};
+// NOTE: GULP
+const { series, parallel, src, dest, watch } = require('gulp');
+
+// NOTE: GENERAL
+const header = require('gulp-header'),
+	rename = require('gulp-rename'),
+	sourcemaps = require('gulp-sourcemaps'),
+	del = require('del'),
+	newer = require('gulp-newer'),
+	lazypipe = require('lazypipe'),
+	packageDetails = require('./package.json');
+
+// NOTE: HANDLEBARS
+var handlebars = require('gulp-compile-handlebars');
+
+// NOTE: STYLES
+const sass = require('gulp-sass'),
+	prefix = require('gulp-autoprefixer'),
+	purgecss = require('gulp-purgecss'),
+	cleanCss = require('gulp-clean-css');
+
+// NOTE: SCRIPTS
+const concat = require('gulp-concat'),
+	jshint = require('gulp-jshint'),
+	stylish = require('jshint-stylish'),
+	include = require('gulp-include'),
+	uglify = require('gulp-uglify'),
+	babel = require('gulp-babel'),
+	flatmap = require('gulp-flatmap');
+
+// NOTE: IMAGES
+const imagemin = require('gulp-imagemin'),
+	webp = require('gulp-webp');
+
+// NOTE: BROWSER SYNC
+const browserSync = require('browser-sync').create();
 
 // NOTE: PATHS
 const paths = {
-	input: 'source/',
-	output: 'build/',
-	scripts: {
-		input: 'source/site-elements/js/*.js',
-		output: 'build/site-elements/js/'
-	},
-	styles: {
-		input: 'source/site-elements/scss/**/*.{scss,sass}',
-		output: 'build/site-elements/css/'
-	},
-	svgs: {
-		input: 'source/site-elements/images/svg/*.{svg}',
-		output: 'build/site-elements/images/svg/'
-	},
-	img: {
-		input: 'source/site-elements/images/general/*.{png,jpg,jpeg}',
-		output: 'build/site-elements/images/'
-	},
-	copy: {
-		input: 'source/pages/*',
-		output: 'build/'
-	},
+	input: 'src/',
+	output: 'dist/',
+	// HANDLEBARS
 	hbs: {
-		input: 'source/templates/*.hbs',
-		output: 'build/'
+		input: 'src/templates/page/*.{handlebars,hbs}',
+		output: 'dist/'
 	},
-	reload: './build/'
+	// STYLES
+	styles: {
+		input: 'src/assets/scss/**/*.{scss,sass}',
+		output: 'dist/assets/css'
+	},
+	// SCRIPTS
+	scripts: {
+		input: 'src/assets/js/*.js',
+		output: 'dist/assets/js/'
+	},
+	// IMAGES
+	img: {
+		input: 'src/assets/img/**/*.{png,jpg,jpeg,gif,svg}',
+		output: 'dist/assets/img/'
+	},
+	// VIDEO
+	vid: {
+		input: 'src/assets/video/*.mp4',
+		output: 'dist/assets/video/'
+	},
+	// RELOAD
+	reload: './dist/'
 };
 
 // NOTE: FILE HEADERS
 const banner = {
 	full:
 		'/*!\n' +
-		' * <%= package.name %> \n' +
-		' * <%= package.description %> \n' +
-		' * <%= package.author %> \n' +
-		' * <%= package.repository.url %> \n' +
+		' * <%= packageDetails.name %> \n' +
+		' * <%= packageDetails.description %> \n' +
+		' * <%= packageDetails.author %> \n' +
+		' * <%= packageDetails.repository.url %> \n' +
 		' */\n\n',
 	min:
 		'/*!' +
-		' * <%= package.name %>' +
-		' | <%= package.author %>' +
-		' | <%= package.repository.url %>' +
+		' * <%= packageDetails.name %>' +
+		' | <%= packageDetails.author %>' +
+		' | <%= packageDetails.repository.url %>' +
 		' */\n'
 };
 
-// NOTE: GULP START
-const { gulp, src, dest, watch, series, parallel } = require('gulp');
-const del = require('del');
-const flatmap = require('gulp-flatmap');
-const lazypipe = require('lazypipe');
-const rename = require('gulp-rename');
-const header = require('gulp-header');
-const package = require('./package.json');
-
-// NOTE: COPY
-var handlebars = require('gulp-compile-handlebars');
-
-// NOTE: SCRIPTS
-const jshint = require('gulp-jshint');
-const stylish = require('jshint-stylish');
-const concat = require('gulp-concat');
-const uglify = require('gulp-terser');
-const optimisejs = require('gulp-optimize-js');
-const include = require('gulp-include');
-
-// NOTE: STYLES
-const sass = require('gulp-sass');
-const prefix = require('gulp-autoprefixer');
-const minify = require('gulp-clean-css');
-const purgecss = require('gulp-purgecss');
-const sourcemaps = require('gulp-sourcemaps');
-
-// NOTE: SVGs
-const svgmin = require('gulp-svgmin');
-
-// NOTE: IMAGES
-const imagemin = require('gulp-imagemin');
-const webp = require('gulp-webp');
-
-// NOTE: BROWSERSYNC
-const browserSync = require('browser-sync');
-
-// NOTE: GULP TASKS
-
-// NOTE: REMOVE EXISTING CONTENT FROM BUILD
-const cleanDist = function(done) {
-	// check is setting is enabled
-	if (!settings.clean) return done();
-
-	// clean the build folder
-	del.sync([paths.output]);
-	return done();
-};
-
-// NOTE: JS TASKS
-const jsTasks = lazypipe()
+let js = lazypipe()
 	.pipe(sourcemaps.init)
 	.pipe(
 		header,
 		banner.full,
-		{ package: package }
+		{ packageDetails: packageDetails }
 	)
 	.pipe(include)
-	.pipe(optimisejs)
+	.pipe(babel)
 	.pipe(
 		dest,
 		paths.scripts.output
 	)
+	.pipe(browserSync.stream)
 	.pipe(
 		rename,
 		{ suffix: '.min' }
 	)
 	.pipe(uglify)
-	.pipe(optimisejs)
+	.pipe(babel)
 	.pipe(
 		header,
 		banner.min,
-		{ package: package }
+		{ packageDetails: packageDetails }
 	)
 	.pipe(sourcemaps.write.bind(null, './maps'))
 	.pipe(
@@ -139,148 +116,163 @@ const jsTasks = lazypipe()
 		paths.scripts.output
 	);
 
-// NOTE: LINT, MINITFY AND CONCATENATE
-const buildScripts = function(done) {
-	if (!settings.scripts) return done();
+// NOTE: REMOVE EXISTING DIST FOLDER
+function clean(done) {
+	// clean the build folder
+	del.sync([paths.output]);
+	return done();
+}
 
-	return src(paths.scripts.input).pipe(
-		flatmap(function(stream, file) {
-			if (file.isDirectory()) {
-				src(file.path + '/*.js')
-					.pipe(concat(file.relative + '.js'))
-					.pipe(jsTasks());
-
-				return stream;
-			}
-
-			return stream.pipe(jsTasks());
-		})
-	);
-};
-
-// NOTE: LINT SCRIPTS
-const lintScripts = function(done) {
-	if (!settings.scripts) return done();
-
-	return src(paths.scripts.input)
-		.pipe(jshint())
-		.pipe(jshint.reporter(stylish));
-};
-
-// NOTE: PROCESS, LINT AND MINIFY SASS FILES
-const buildStyles = function(done) {
-	if (!settings.styles) return done();
-
-	return src(paths.styles.input)
-		.pipe(sourcemaps.init())
-		.pipe(sass({ outputStyle: 'expanded', sourceComments: true }))
-		.on('error', sass.logError)
-		.pipe(
-			prefix({
-				browsers: ['last 2 version', '> 0.25%'],
-				cascade: true,
-				remove: true
-			})
-		)
-		.pipe(purgecss({ content: ['source/**/*.html', 'source/**/*.hbs'] }))
-		.pipe(header(banner.full, { package: package }))
-		.pipe(dest(paths.styles.output))
-		.pipe(rename({ suffix: '.min' }))
-		.pipe(minify({ level: { 1: { specialComments: 'none' } } }))
-		.pipe(header(banner.min, { package: package }))
-		.pipe(sourcemaps.write('./maps'))
-		.pipe(dest(paths.styles.output));
-};
-
-// NOTE: OPTIMISE SVG FILES
-const buildSVGs = function(done) {
-	if (!settings.svgs) return done();
-
-	return src(paths.svgs.input)
-		.pipe(svgmin())
-		.pipe(dest(paths.svgs.output));
-};
-
-// NOTE: OPTIMISE IMAGE FILES
-const buildImages = function(done) {
-	if (!settings.img) return done();
-
-	return src(paths.img.input)
-		.pipe(
-			imagemin([
-				imagemin.jpegtran({ progressive: true }),
-				imagemin.optipng({ optimizationLevel: 5 })
-			])
-		)
-		.pipe(dest(paths.img.output))
-		.pipe(webp())
-		.pipe(dest(paths.img.output));
-};
-
-// NOTE: STATIC FILES TO BUILD FOLDER
-const copyFiles = function(done) {
-	if (!settings.copy) return done();
-
-	return src(paths.copy.input).pipe(dest(paths.copy.output));
-};
-
-// NOTE: HBS FILES TO BUILD FOLDER
-const hbsFiles = function(done) {
-	if (!settings.hbs) return done();
-
+// NOTE: COMPILE HBS TO HTML
+function hbs() {
 	return src(paths.hbs.input)
 		.pipe(
 			handlebars(
 				{},
 				{
 					ignorePartials: true,
-					batch: ['./source/partials/']
+					batch: ['./src/templates/partials/']
 				}
 			)
 		)
 		.pipe(rename({ extname: '.html' }))
-		.pipe(dest(paths.hbs.output));
-};
+		.pipe(dest(paths.hbs.output))
+		.pipe(browserSync.stream());
+}
 
-// NOTE: WATCH FOR CHANGES TO THE SOURCE FOLDER
-const startServer = function(done) {
-	if (!settings.reload) return done();
+// NOTE: COMPILE, LINT, CONCAT, REMOVE UNUSED AND MINIFY
+function css() {
+	return src(paths.styles.input)
+		.pipe(sass({ outputStyle: 'expanded', sourceComments: true }))
+		.on('error', sass.logError)
+		.pipe(
+			prefix({
+				cascade: true,
+				remove: true,
+				grid: 'autoplace'
+			})
+		)
+		.pipe(
+			purgecss({
+				content: ['src/*.html', 'src/**/*.hbs']
+			})
+		)
+		.pipe(header(banner.full, { packageDetails: packageDetails }))
+		.pipe(dest(paths.styles.output))
+		.pipe(sourcemaps.init())
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(cleanCss({ level: { 1: { specialComments: 'none' } } }))
+		.pipe(header(banner.min, { packageDetails: packageDetails }))
+		.pipe(sourcemaps.write('./maps'))
+		.pipe(dest(paths.styles.output))
+		.pipe(browserSync.stream());
+}
+
+// NOTE: COMPILE, CONCAT AND MINIFY
+function jsMinify() {
+	return src(paths.scripts.input).pipe(
+		flatmap(function(stream, file) {
+			if (file.isDirectory()) {
+				src(file.path + '/*.js')
+					.pipe(concat(file.relative + '.js'))
+					.pipe(js());
+
+				return stream;
+			}
+
+			return stream.pipe(js()).pipe(browserSync.stream());
+		})
+	);
+}
+
+// NOTE: JS ERROR HANDLING
+function jsLint() {
+	return src(paths.scripts.input)
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish));
+}
+
+// NOTE: OPTIMISE IMAGE FILES
+function img() {
+	return src(paths.img.input)
+		.pipe(newer(paths.img.output))
+		.pipe(
+			imagemin([
+				imagemin.gifsicle({ interlaced: true }),
+				imagemin.jpegtran({ progressive: true }),
+				imagemin.optipng({ optimizationLevel: 5 }),
+				imagemin.svgo({
+					plugins: [{ removeViewBox: true }, { cleanupIDs: false }]
+				})
+			])
+		)
+		.pipe(dest(paths.img.output))
+		.pipe(newer(paths.img.output))
+		.pipe(webp())
+		.pipe(dest(paths.img.output));
+}
+
+// NOTE: COPY VIDEO FILES
+function video() {
+	return src(paths.vid.input)
+		.pipe(newer(paths.vid.output))
+		.pipe(dest(paths.vid.output));
+}
+
+// NOTE: INITIATE SERVER
+function server(done) {
 	browserSync.init({
 		server: {
 			baseDir: paths.reload
 		}
 	});
 	done();
-};
-
-// NOTE: RELOAD THE BROWSER WHEN FILES CHANGE
-const reloadBrowser = function(done) {
-	if (!settings.reload) return done();
-	browserSync.reload();
-	done();
-};
+}
 
 // NOTE: WATCH FOR CHANGES
-const watchSource = function(done) {
-	watch(paths.input, series(exports.default, reloadBrowser));
-	done();
-};
+function changed() {
+	return (
+		watch(
+			['src/assets/scss/'],
+			series(css, function cssRelaod(done) {
+				browserSync.reload();
+				done();
+			})
+		),
+		watch(
+			['src/templates/'],
+			series(hbs, function hbsRelaod(done) {
+				browserSync.reload();
+				done();
+			})
+		),
+		watch(
+			['src/assets/js/'],
+			series(jsMinify, function jsRelaod(done) {
+				browserSync.reload();
+				done();
+			})
+		)
+	);
+}
 
-// NOTE: EXPORT TASKS
-
-// Default task (gulp)
-exports.default = series(
-	cleanDist,
-	parallel(
-		copyFiles,
-		hbsFiles,
-		buildScripts,
-		lintScripts,
-		buildStyles,
-		buildSVGs,
-		buildImages
-	)
+// COMPILE< WATCH AND RELOAD (gulp watch)
+exports.watch = series(
+	parallel(hbs),
+	parallel(css, series(jsLint)),
+	parallel(jsMinify),
+	parallel(img, series(video)),
+	parallel(server, series(changed))
 );
 
-// Watch and reload (gulp watch)
-exports.watch = series(exports.default, startServer, watchSource);
+// REMOVE DIST FOLTER (gulp clean)
+exports.clean = series(clean);
+
+// COMPILE EVERYTHING NO BROWSER (gulp)
+exports.default = series(
+	clean,
+	parallel(hbs),
+	parallel(css, series(jsLint)),
+	parallel(jsMinify),
+	parallel(img, series(video))
+);

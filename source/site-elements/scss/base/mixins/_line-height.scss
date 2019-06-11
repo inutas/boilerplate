@@ -1,5 +1,0 @@
-// Usage: @include line-height(16);
-@mixin line-height($size: 12, $base: 16) {
-    line-height: $size + px;
-    line-height: ($size / $base) * 1rem;
-}
