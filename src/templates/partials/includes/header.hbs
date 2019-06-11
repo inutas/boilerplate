@@ -1,4 +1,234 @@
-{{! includes/footer.hbs }}
-<p>
-  A basic header
-</p>
+<header>
+  <section class="main-navigation">
+    <div class="content">
+      <div class="logo">
+        <a class="image-link" title="University homepage" href="/">
+          <img class="black" alt="The University of Hull" src="//www.hull.ac.uk/site-elements/img/layout/header/logo/UoH-logo.svg" />
+        </a>
+      </div>
+      <nav>
+        <ul class="desktop-only">
+          <li class="study"><a class="image-link">Study</a></li>
+          <li class="choose"><a class="image-link">Choose Hull</a></li>
+          <li class="research"><a class="image-link">Research</a></li>
+          <li class="business"><a class="image-link">Business</a></li>
+          <li class="work"><a class="image-link">Work with us</a></li>
+          <li class="search"><a class="image-link"><i class="fa fa-search">&nbsp;</i></a></li>
+        </ul>
+        <div class="ham-menu mobile-only">
+          <button class="hamburger hamburger--htx" title="Main menu"><span>toggle menu</span></button>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <section class="menu-items search">
+    <div class="content">
+      <div class="search-container">
+        <div class="select-container">
+          <select id="filters" class="select-filter" name="filters">
+            <option selected="selected" value="Everything">All</option>
+            <option value="Courses">Courses</option>
+            <option value="People">People</option>
+            <option value="Research">Research</option>
+            <option value="Business">Business</option>
+            <option value="News">News</option>
+          </select>
+        </div>
+        <div class="searchbox-container">
+          <input id="siteSearch" accesskey="q" class="search" title="Search the website" type="search" autocomplete="off" placeholder="Search the website" size="15" name="query" />
+          <input id="goButton" title="Search our website" type="button" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="navigation">
+    <div class="content">
+      <div class="primary mobile-only">
+        <div class="magic-box">
+          <ul>
+            <li class="study"><a class="image-link">Study</a></li>
+            <li class="choose"><a class="image-link">Choose Hull</a></li>
+            <li class="research"><a class="image-link">Research</a></li>
+            <li class="business"><a class="image-link">Business</a></li>
+            <li class="work"><a class="image-link">Work with us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="secondary">
+        <div class="menu-items study">
+          <strong>Choose your subject</strong>
+          <ul>
+            <li><a href="/faculties/subjects/accounting-and-finance.aspx">Accounting and Finance</a></li>
+            <li><a href="/faculties/subjects/american-studies.aspx">American Studies</a></li>
+            <li><a href="/faculties/subjects/biochemistry.aspx">Biochemistry</a></li>
+            <li><a href="/faculties/subjects/biological-science.aspx">Biological Science</a></li>
+            <li><a href="/faculties/subjects/biomedical-sciences.aspx">Biomedical and Forensic Science</a></li>
+            <li><a href="/faculties/subjects/business-management.aspx">Business and Management</a></li>
+            <li><a href="/faculties/subjects/chemical-engineering.aspx">Chemical Engineering</a></li>
+            <li><a href="/faculties/subjects/chemistry.aspx">Chemistry</a></li>
+            <li><a href="/faculties/subjects/computer-science.aspx">Computer Science</a></li>
+            <li><a href="/faculties/subjects/criminology.aspx">Criminology</a></li>
+            <li><a href="/faculties/subjects/drama.aspx">Drama</a></li>
+            <li><a href="/faculties/subjects/economics.aspx">Economics</a></li>
+            <li><a href="/faculties/subjects/education-teaching-childhood.aspx">Education, Teaching and Childhood Studies</a></li>
+            <li><a href="/faculties/subjects/electrical-and-electronic-engineering.aspx">Electrical and Electronic Engineering</a></li>
+            <li><a href="/faculties/subjects/english.aspx">English and Creative Writing</a></li>
+            <li><a href="/faculties/subjects/environmental-science.aspx">Environmental Science</a></li>
+            <li><a href="/faculties/subjects/film-digital-media.aspx">Film and Digital Media</a></li>
+            <li><a href="/faculties/subjects/geography.aspx">Geography</a></li>
+            <li><a href="/faculties/subjects/geology.aspx">Geology</a></li>
+            <li><a href="/faculties/subjects/health-nursing-and-midwifery.aspx">Health, Nursing and Midwifery</a></li>
+            <li><a href="/faculties/subjects/history.aspx">History</a></li>
+            <li><a href="/faculties/subjects/law.aspx">Law</a></li>
+            <li><a href="/faculties/subjects/supply-chain-management.aspx">Logistics and Supply Chain Management</a></li>
+            <li><a href="/faculties/subjects/marketing.aspx">Marketing</a></li>
+            <li><a href="/faculties/subjects/mathematics.aspx">Mathematics</a></li>
+            <li><a href="/faculties/subjects/mechanical-engineering.aspx">Mechanical Engineering</a></li>
+            <li><a href="/faculties/subjects/mechatronics-and-robotics.aspx">Mechatronics and Robotics</a></li>
+            <li><a href="/faculties/subjects/medical-and-biomedical-engineering.aspx">Medical and Biomedical Engineering</a></li>
+            <li><a href="/faculties/subjects/medicine.aspx">Medicine</a></li>
+            <li><a href="/faculties/subjects/modern-languages-and-cultures.aspx">Modern Languages and Cultures</a></li>
+            <li><a href="/faculties/subjects/music.aspx">Music</a></li>
+            <li><a href="/faculties/subjects/philosophy.aspx">Philosophy</a></li>
+            <li><a href="/faculties/subjects/physics-and-astrophysics.aspx">Physics and Astrophysics</a></li>
+            <li><a href="/faculties/subjects/politics-security-international-studies.aspx">Politics and International Studies</a></li>
+            <li><a href="/faculties/subjects/psychology.aspx">Psychology</a></li>
+            <li><a href="/faculties/subjects/social-work-welfare.aspx">Social Work</a></li>
+            <li><a href="/faculties/subjects/sociology-social-sciences.aspx">Sociology and Social Sciences</a></li>
+            <li><a href="/faculties/subjects/sport-health-and-exercise-science.aspx">Sport, Health and Exercise Science</a></li>
+          </ul>
+
+        <div class="more-courses"><span>View all our courses:</span> <a title="View all our undergraduate courses" href="/study/ug/all-ug.aspx">Undergraduate</a> <a title="View all our postgraduate taught courses" href="/study/pgt/all-pgt.aspx">Postgraduate Taught</a> <a title="View all our postgraduate research courses" href="/study/pgr/index.aspx">Postgraduate Research</a> <a title="View all our PhD Scholarships" href="/study/pgr/phd/phd-scholarships.aspx">PhD Scholarships</a> <a title="View all our Online courses" target="_blank" href="https://online.hull.ac.uk">Online</a> <a class="orderpros" title="Order a prospectus" href="/study/prospectuses-and-brochures/prospectuses-and-brochures.aspx">Order a prospectus</a></div>
+        </div>
+        <div class="menu-items choose">
+        <div class="menu-item-containers">
+          <strong>University and region</strong>
+
+
+
+        <ul>
+          <li><a href="/choose-hull/university-and-region/about-us/about-the-university-of-hull.aspx">About the University of Hull</a></li>
+          <li><a href="/choose-hull/university-and-region/team-gb/team-gb-partnership.aspx">Team GB Partnership</a></li>
+          <li><a href="/choose-hull/university-and-region/city-of-culture-2017/uk-city-of-culture.aspx">UK City of Culture</a></li>
+          <li><a href="/choose-hull/university-and-region/the-city-of-hull/about-hull-and-the-region.aspx">Hull and the Region</a></li>
+          <li><a href="/choose-hull/university-and-region/sustainability/sustainability.aspx">Sustainability</a></li>
+          <li><a href="/choose-hull/university-and-region/key-documents/key-documents.aspx">Key documents</a></li>
+        </ul>
+        </div>
+        <div class="menu-item-containers"><strong>Study at Hull</strong>
+
+
+
+        <ul>
+          <li><a href="/choose-hull/study-at-hull/visit-us/visit-us.aspx">Visit us</a></li>
+          <li><a href="/choose-hull/study-at-hull/doctoral-college/doctoral-college.aspx">Doctoral College</a></li>
+          <li><a href="/choose-hull/study-at-hull/student-contract/student-contract.aspx">Student Contract</a></li>
+          <li><a href="/choose-hull/study-at-hull/welcome/welcome-week.aspx">Welcome Week</a></li>
+          <li><a href="/choose-hull/study-at-hull/international/international.aspx">International</a></li>
+          <li><a href="/choose-hull/study-at-hull/admissions/applying-to-hull.aspx">Applying to Hull</a></li>
+          <li><a href="/choose-hull/study-at-hull/money/money.aspx">Money</a></li>
+          <li><a href="/choose-hull/study-at-hull/library/index.aspx">University Library</a></li>
+          <li><a href="/choose-hull/study-at-hull/careers-and-employability/careers-and-employability.aspx">Careers and employability</a></li>
+          <li><a href="/choose-hull/study-at-hull/scholarships-and-bursaries/scholarships-and-bursaries.aspx">Scholarships and bursaries</a></li>
+        </ul>
+        </div>
+        <div class="menu-item-containers"><strong>Student life</strong>
+
+
+
+        <ul>
+          <li><a href="/choose-hull/student-life/student-support/student-support.aspx">Student support</a></li>
+          <li><a href="/choose-hull/student-life/virtual-tour/virtual-tour.aspx">Virtual tour</a></li>
+          <li><a href="/choose-hull/student-life/why-choose-hull/why-choose-hull.aspx">Choose Hull</a></li>
+          <li><a href="/choose-hull/student-life/accommodation/accommodation.aspx">Accommodation</a></li>
+          <li><a href="/choose-hull/student-life/students-union/students-union.aspx">Students&#39; union</a></li>
+          <li><a href="/choose-hull/student-life/clubs-and-societies/clubs-and-societies.aspx">Clubs and societies</a></li>
+          <li><a href="/choose-hull/student-life/sport-and-leisure/sports-and-leisure.aspx">Sports and leisure</a></li>
+          <li><a href="/choose-hull/student-life/graduation-ceremonies/graduation-ceremonies.aspx">Graduation ceremonies</a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="menu-items research">
+          <div class="heading">
+            <a title="Our research" href="/work-with-us/research/research.aspx"> Visit Research home </a>
+          </div>
+
+          <div class="main-links">
+            <div>
+              <strong>Our research</strong>
+              <ul>
+                <li><a title="Hot topics" href="/work-with-us/research/hot-topics.aspx">Hot topics</a></li>
+                <li><a title="Research Institutes" href="/work-with-us/research/research-institutes.aspx">Research institutes</a></li>
+                <li><a title="Faculty research" href="/work-with-us/research/faculty-research.aspx">Faculty research</a></li>
+                <li><a title="Research directory" href="/work-with-us/research/research-directory.aspx">Research directory</a></li>
+              </ul>
+            </div>
+            <div>
+              <strong>Our people</strong>
+              <ul>
+                <li><a title="Research - Our people" href="/work-with-us/research/our-people.aspx">Search our experts</a></li>
+                <li><a title="Research partnerships" href="/work-with-us/research/research-partnerships.aspx">Partnerships and collaborations</a></li>
+              </ul>
+            </div>
+            <div>
+              <strong>Research with us</strong>
+              <ul>
+                <li><a title="Why join us" href="/work-with-us/research/why-join-us.aspx">Supporting our researchers</a></li>
+                <li><a title="Postgraduate research" href="/study/pgr/index.aspx">PG research</a></li>
+                <li><a title="Graduate School" href="/choose-hull/study-at-hull/doctoral-college/doctoral-college.aspx">Graduate School</a></li>
+              </ul>
+            </div>
+            <div>
+              <strong>Research environment</strong>
+              <ul>
+                <li><a title="Research integrity and governance" href="/work-with-us/research/governance/research-integrity-and-governance.aspx">Research integrity and governance</a></li>
+                <li><a title="Research news" href="/work-with-us/more/media-centre/news/news-archive.aspx?cat=research">Research news</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="links">
+            <strong>Quick links</strong>
+            <a class="quick" title="Research directory" href="/work-with-us/research/research-directory.aspx">Search all research</a>
+            <a class="quick" title="Research - Our people" href="/work-with-us/research/our-people.aspx">Find a researcher</a>
+            <a class="quick" href="/work-with-us/research/talk-to-our-team.aspx">Contact us</a>
+          </div>
+        </div>
+
+        <div class="menu-items business">
+          <div class="menu-item-containers">
+            <strong>Business</strong>
+            <ul>
+              <li><a href="/work-with-us/business/index.aspx">Business</a></li>
+              <li><a href="/work-with-us/business/partnerships-and-collaborations.aspx">Partnerships and collaborations</a></li>
+              <li><a href="/work-with-us/business/access-to-funding.aspx">Develop your people</a></li>
+              <li><a href="/work-with-us/business/supporting-growth-and-innovation.aspx">Supporting growth and innovation</a></li>
+              <li><a href="/work-with-us/business/jobs-internships-industry-placements.aspx">Jobs, internships and industry placements</a></li>
+              <li><a href="/work-with-us/business/contact-us.aspx">Contact us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="menu-items work">
+          <div class="menu-item-containers">
+            <strong>Work with us</strong>
+            <ul>
+              <li><a href="/work-with-us/more/jobs/work-with-us.aspx">Work with us</a></li>
+              <li><a href="/work-with-us/more/media-centre/news/news.aspx">News</a></li>
+              <li><a href="/work-with-us/more/conferences-and-venue-hire/conferences-and-venue-hire.aspx">Conferences, events and venue hire</a></li>
+              <li><a href="/work-with-us/more/schools-and-colleges/schools-and-colleges-liaison.aspx">Schools and colleges</a></li>
+              <li><a href="/work-with-us/more/alumni/alumni.aspx">Hull University Alumni</a></li>
+              <li><a href="/work-with-us/more/academic-partnerships.aspx">Academic partnerships</a></li>
+              <li><a href="/work-with-us/more/health-safety-services/health-safety-services.aspx">Health &amp; Safety Services</a></li>
+              <li><a href="/work-with-us/more/supplying-our-university/procurement.aspx">Procurement</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</header>

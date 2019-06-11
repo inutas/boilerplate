@@ -1,5 +1,12 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+	<!--[if lt IE 7]>      <html lang="en-GB" class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6" lang="en-gb" dir="ltr" itemscope="" itemtype="http://schema.org/WebPage"> <![endif]-->
+	<!--[if IE 7]>         <html lang="en-GB" class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-gb" dir="ltr" itemscope="" itemtype="http://schema.org/WebPage"> <![endif]-->
+	<!--[if IE 8]>         <html lang="en-GB" class="no-js lt-ie9 lt-ie8" lang="en-gb" dir="ltr" itemscope="" itemtype="http://schema.org/WebPage"> <![endif]-->
+	<!--[if IE 9]>         <html lang="en-GB" class="no-js lt-ie9" lang="en-gb" dir="ltr" itemscope="" itemtype="http://schema.org/WebPage"> <![endif]-->
+	<!--[if gt IE 9]><!-->
+	<html lang="en-GB" class="no-js" dir="ltr" itemscope="" itemtype="http://schema.org/WebPage">
+	<!--<![endif]-->
+
   <head>
 
     {{> includes/meta }}
@@ -8,24 +15,29 @@
       {{!-- Custom <head> content per page could be added. --}}
     {{/styles-block}}
   </head>
+
   <body>
-    <main>
+			<main class="wrap" id="top">
 
-      <header>
-        <div class="content">
-          {{> includes/header }}
-
-        </div>
-      </header>
+				<div>
+					<a href="#main-content" class="visuallyhidden focusable">Skip to content</a>
+				</div>
 
 
-      <footer>
-        <div class="content">
-          {{> includes/footer }}
+        {{> includes/header}}
 
-        </div>
-      </footer>
 
+      <article itemprop="mainEntity" itemtype="http://schema.org/CreativeWork" id="main-content" role="main">
+
+
+        {{!-- {{> components/landing/hero}} --}}
+
+
+      </article>
+
+
+
+      {{> includes/footer}}
     </main>
 
     {{#> scripts-block}}
