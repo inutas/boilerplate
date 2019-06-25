@@ -1,0 +1,178 @@
+// NOTE: HELPERS
+._container {
+	position: relative;
+	margin: 0 auto;
+	max-width: 1240px;
+
+	padding: {
+		left: 20px;
+		right: 20px;
+	}
+}
+
+._content {
+	position: relative;
+	display: block;
+	margin-top: 90px;
+}
+
+.button {
+	border: 2px solid;
+	color: $white;
+	display: inline-block;
+	margin-top: 40px;
+	padding: 15px 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background 300ms ease-in-out, border-color 300ms ease-in-out,
+		color 300ms ease-in-out;
+	&.-default-btn {
+		background: $white;
+		border-color: $white;
+		&:hover {
+			background: transparent;
+			color: $white !important;
+		}
+	}
+	&.-bg-crimson {
+		background: $crimson;
+		border-color: $crimson;
+		&:hover {
+			background: shade($crimson, 20%);
+			border-color: shade($crimson, 20%);
+		}
+	}
+	&.-bg-plum {
+		background: $plum;
+		border-color: $plum;
+		&:hover {
+			background: shade($plum, 20%);
+			border-color: shade($plum, 20%);
+		}
+	}
+	&.-bg-orange {
+		background: $orange;
+		border-color: $orange;
+		&:hover {
+			background: shade($orange, 20%);
+			border-color: shade($orange, 20%);
+		}
+	}
+	&.-bg-blue {
+		background: $blue;
+		border-color: $blue;
+		&:hover {
+			background: shade($blue, 20%);
+			border-color: shade($blue, 20%);
+		}
+	}
+	&.-bg-teal {
+		background: $teal;
+		border-color: $teal;
+		&:hover {
+			background: shade($teal, 20%);
+			border-color: shade($teal, 20%);
+		}
+	}
+	&.-bg-teal-light {
+		background: $sea;
+		border-color: $sea;
+		&:hover {
+			background: shade($sea, 20%);
+			border-color: shade($sea, 20%);
+		}
+	}
+}
+
+// PADDING
+.-pad-top {
+	padding-top: 150px;
+	@include bp(phone) {
+		padding-top: 80px;
+	}
+}
+
+// NEGATIVE MARGINS
+.-overlap {
+	&-top-bottom {
+		margin-top: -175px;
+		margin-bottom: -16%;
+		@include bp(phone) {
+			margin-top: -140px;
+		}
+	}
+	&-bottom {
+		margin-bottom: -12%;
+	}
+	&-top {
+		margin-bottom: -100px;
+	}
+}
+
+.-no-margin-top {
+	margin-top: -70px;
+}
+
+// PSEUDO BACKGROUND COLOURS
+.-bg-blue {
+	color: $white;
+	&::before {
+		background: $blue;
+	}
+}
+.-bg-plum {
+	color: $white;
+	&::before {
+		background: $plum;
+	}
+}
+.-bg-crimson {
+	color: $white;
+	&::before {
+		background: $crimson;
+	}
+}
+.-bg-teal {
+	color: $white;
+	&::before {
+		background: $teal;
+	}
+}
+.-bg-teal-light {
+	color: $white;
+	&::before {
+		background: $sea;
+	}
+}
+.-bg-orange {
+	color: $white;
+	&::before {
+		background: $orange;
+	}
+}
+.-bg-grey {
+	color: $grey;
+	&::before {
+		background: $light-grey;
+	}
+}
+
+// TEXT COLOURS
+.-blue-text {
+	color: $blue !important;
+}
+.-plum-text {
+	color: $plum !important;
+}
+.-crimson-text {
+	color: $crimson !important;
+}
+.-teal-text {
+	color: $teal !important;
+}
+.-teal-light-text {
+	color: $sea !important;
+}
+.-orange-text {
+	color: $orange !important;
+}
