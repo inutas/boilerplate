@@ -1,0 +1,63 @@
+// Usage: @include bp(desktop);
+@mixin bp($point) {
+	@if $point==phone-s {
+		@media (max-width: #{$phone-s}){
+			@content;
+		}
+	}
+	@else if $point==phone {
+		@media (max-width: #{$phone}){
+			@content;
+		}
+	}
+	@else if $point==phonemin {
+		@media (min-width: #{$phone}){
+			@content;
+		}
+	}
+	@else if $point==phone-l {
+		@media (max-width: #{$phone-l}){
+			@content;
+		}
+	}
+	@else if $point==phone-lmin {
+		@media (min-width: #{$phone-l}){
+			@content;
+		}
+	}
+	@else if $point==tablet-p {
+		@media (max-width: #{$tablet-p}){
+			@content;
+		}
+	}
+	@else if $point==tablet-h {
+		@media (max-height: #{$tablet-p}){
+			@content;
+		}
+	}
+	@else if $point==tabletmin {
+		@media (min-width: #{$tablet}){
+			@content;
+		}
+	}
+	@else if $point==tablet {
+		@media (max-width: #{$tablet}){
+			@content;
+		}
+	}
+	@else if $point==desktopmin {
+		@media (min-width: #{$desktop}){
+			@content;
+		}
+	}
+	@else if $point==desktop {
+		@media (max-width: #{$desktop}){
+			@content;
+		}
+	}
+	@else if $point==retina {
+		@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){
+			@content;
+		}
+	}
+}
