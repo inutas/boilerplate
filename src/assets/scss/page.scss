@@ -1,12 +1,20 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 @import 'abstracts/functions';
 @import 'abstracts/helpers';
-@import 'abstracts/mixins';
 
 @import 'base/resets';
+@import 'base/typography';
 
 @import 'layout/header';
 @import 'layout/navigation';
 @import 'layout/footer';
 
+@import 'components/ui';
+
 @import 'pages/home';
+
+@import 'base/utilities'; // DEBUG ENABLED, COMMENT OUT TO DISABLE
+
+@import 'vendor/simplelight';
+@import 'vendor/slick';
