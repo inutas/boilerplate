@@ -1,0 +1,64 @@
+// USED FOR DEBUGGING ONLY
+
+article > section {
+	position: relative;
+	border: 5px solid dodgerblue;
+	padding: 10px;
+	margin: 20px 10px;
+	box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+	&::before {
+		position: absolute;
+		content: 'Section: blue';
+		color: dodgerblue;
+		top: -22px;
+		font-weight: 700;
+	}
+	> ._container {
+		position: relative;
+		border: 5px solid coral;
+		box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+		&::before {
+			position: absolute;
+			content: 'Container: coral';
+			color: coral;
+			top: -22px;
+			font-weight: 700;
+		}
+
+		> ._content {
+			position: relative;
+			border: 5px solid rebeccapurple;
+			padding: 10px;
+			margin: 20px 10px;
+			box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+			&::before {
+				position: absolute;
+				content: 'Content: purple';
+				color: rebeccapurple;
+				top: -22px;
+				font-weight: 700;
+			}
+			div {
+				position: relative;
+				border: 5px solid darkcyan;
+				padding: 2px;
+				margin: 10px 5px;
+				box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+				&::before {
+					position: absolute;
+					content: 'Child div';
+					color: darkcyan;
+					top: -22px;
+					font-weight: 700;
+				}
+			}
+			*:not(div) {
+				border: 5px solid dimgray;
+				// border: none;
+				padding: 10px;
+				margin: 10px;
+				box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.75);
+			}
+		}
+	}
+}
