@@ -1,1 +1,2 @@
-//=include /vendor/*.js
+//=include /vendor/simplelight.js
+//=include /vendor/slick.js
