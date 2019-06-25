@@ -1,2 +1,104 @@
+body {
+	@include font-size(18);
+	font-family: $base-font;
+}
 
+.heading-1 {
+	@include font-size(70);
+	font-family: $heading-font;
+	transition: font-size 500ms ease-in-out;
+	@include bp(tablet) {
+		font-size: 4vw;
+		line-height: calc(4vw + 5px);
+		transition: font-size 500ms ease-in-out;
+	}
+	@include bp(phone) {
+		@include font-size(30);
+		transition: font-size 500ms ease-in-out;
+	}
+}
+.heading-2 {
+	@include font-size(40);
+	font-family: $heading-font;
+	transition: font-size 500ms ease-in-out;
+	@include bp(tablet) {
+		@include font-size(35);
+		font-size: 3.5vw;
+		line-height: calc(3.5vw + 5px);
+		transition: font-size 500ms ease-in-out;
+	}
+	@include bp(phone-l) {
+		@include font-size(30);
+		transition: font-size 500ms ease-in-out;
+	}
+}
+.heading-3 {
+	@include font-size(30);
+	font-family: $heading-font;
+	transition: font-size 500ms ease-in-out;
+	@include bp(tablet) {
+		@include font-size(26);
+		font-size: 3vw;
+		line-height: calc(3vw + 5px);
+		transition: font-size 500ms ease-in-out;
+	}
+	@include bp(phone-l) {
+		@include font-size(24);
+		transition: font-size 500ms ease-in-out;
+	}
+}
+.heading-4 {
+	@include font-size(26);
+	font-family: $heading-font;
+	transition: font-size 500ms ease-in-out;
+	@include bp(phone-l) {
+		@include font-size(22);
+		transition: font-size 500ms ease-in-out;
+	}
+}
+.heading-5 {
+	@include font-size(22);
+	font-family: $heading-font;
+	transition: font-size 500ms ease-in-out;
+	@include bp(phone-l) {
+		@include font-size(20);
+		transition: font-size 500ms ease-in-out;
+	}
+}
+.heading {
+	&-1,
+	&-2,
+	&-3,
+	&-4,
+	&-5 {
+		&.-teal {
+			color: $teal;
+		}
+		&.-crimson {
+			color: $crimson;
+		}
+		&.-plum {
+			color: $plum;
+		}
+		&.-grey {
+			color: $grey;
+		}
+		&.-white {
+			color: $white;
+		}
+	}
+}
 
+p,
+ul {
+	@include font-size(18);
+	font-family: $base-font;
+}
+
+.-bold {
+	font-weight: 700;
+}
+
+.-italic {
+	font-style: italic;
+}
