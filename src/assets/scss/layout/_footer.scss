@@ -1,0 +1,225 @@
+footer {
+  background: $grey;
+  color: $white;
+  // @include f-stag-sans(300);
+  font-family: $base-font;
+  font-weight: 300;
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+  .container {
+    background: url('https://www.hull.ac.uk/site-elements/img/layout/footer/foot-loc-white.svg')
+      top right no-repeat;
+    background-size: 30% auto;
+    @include center(1240px, 20px);
+    display: grid;
+    grid-template-columns: 300px 190px 190px 400px;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'staff contact find map'
+      'social social social social'
+      'colophon . . .'
+      'legal legal legal legal';
+    grid-gap: 50px 50px;
+    padding: {
+      top: 50px;
+      bottom:30px;
+    }
+    @include bp(tablet) {
+      background: url('https://www.hull.ac.uk/site-elements/img/layout/footer/foot-loc-white.svg')
+        top right no-repeat;
+      background-size: 46% auto;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        'staff staff .'
+        'find contact .'
+        'social social social'
+        'colophon colophon colophon'
+        'legal legal legal';
+      grid-gap: 30px;
+    }
+    @include bp(tablet-p) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 275px auto;
+      grid-template-areas:
+        '.'
+        'staff'
+        'contact'
+        'find'
+        'social'
+        'colophon'
+        'legal';
+      background: url('https://www.hull.ac.uk/site-elements/img/layout/footer/foot-loc-white.svg')
+        top center no-repeat;
+      background-size: 350px auto;
+    }
+    @include bp(phone) {
+      background: url('https://www.hull.ac.uk/site-elements/img/layout/footer/foot-loc-white.svg')
+        top center no-repeat;
+      background-size: contain;
+    }
+    h5 {
+      margin-bottom: 40px;
+      @include font-size(24);
+      // @include f-stag(600);
+      font-family: $heading-font;
+      font-weight: 300;
+      @include bp(tablet-p) {
+        margin-bottom: 30px;
+      }
+    }
+    a[href]:not([class]) {
+      color: $white;
+      font-weight: 300;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    ul {
+      list-style-type: none;
+      li {
+        margin-left: 0;
+        @include font-size(18);
+        a {
+          color: $white;
+          text-decoration: none;
+          font-weight: 300;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .staff {
+      grid-area: staff;
+      ul {
+        column-count: 2;
+      }
+    }
+    .contact {
+      grid-area: contact;
+      a {
+        padding-left: 0 !important;
+        &::before {
+          display: none;
+        }
+      }
+    }
+    .find {
+      grid-area: find;
+      @include bp(tablet-p) {
+        address {
+          display: inline-block;
+          ul {
+            margin-left: 0;
+          }
+        }
+        ul {
+          display: inline-block;
+          margin-left: 20px;
+        }
+      }
+      address {
+        font-style: normal;
+        margin-bottom: 20px;
+        p {
+          margin-bottom: 18px;
+          font-weight: bold;
+        }
+      }
+    }
+    .social {
+      grid-area: social;
+      ul {
+        @include bp(phone-l) {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          margin-left: -15px;
+        }
+        li {
+          display: inline-block;
+          text-align: left;
+          height: 50px;
+          margin: 0 24px;
+          @include bp(tablet) {
+            margin: 15px;
+          }
+          &:first-of-type {
+            margin-left: 0;
+          }
+          &:last-of-type {
+            margin-right: 0;
+          }
+          a {
+            height: 60px;
+            width: 60px;
+            color: white;
+            background: transparent;
+            @include font-size(40);
+            svg {
+              width: 60px;
+              height: 48px;
+              margin-bottom: -6px;
+              @include bp(phone-l) {
+                width: 60px;
+                height: 60px;
+                padding: 0 0 15px 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .copy {
+      color: $white;
+      @include font-size(16);
+      font-weight: 600;
+      grid-area: colophon;
+      padding-bottom: 18px;
+      align-self: end;
+      span {
+        font-weight: 300;
+      }
+    }
+    .legal {
+      grid-area: legal;
+      margin-top: -40px;
+      @include bp(tablet) {
+        justify-self: start;
+        margin-top: 0;
+      }
+      ul {
+        // text-align: right;
+        @include bp(tablet) {
+          // text-align: left;
+          // margin-bottom: 30px;
+        }
+        li {
+          display: inline-block;
+          @include font-size(14);
+          margin: {
+            left: 0;
+            bottom: 15px;
+            top: 0;
+            right: 30px;
+          }
+          @include bp(tablet) {
+            margin: {
+              left: 0;
+              right: 30px;
+            }
+          }
+          @include bp(tablet-p) {
+            display: block;
+            margin: {
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
